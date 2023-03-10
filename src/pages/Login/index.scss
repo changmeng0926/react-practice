@@ -1,0 +1,22 @@
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #cedce7;
+  .logo {
+    width: 64px;
+    height: 64px;
+    display: block;
+    margin: 0 auto;
+  }
+  form {
+    margin-top: 32px;
+  }
+  .agreement-link {
+    color: #1677ff;
+  }
+}
+#normal_login .login-form-button {
+  width: 100%;
+}
