@@ -1,8 +1,8 @@
 import { Button, Checkbox, Form, Input, Card } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
-import logo from '@assets/imgs/logo.jpg'
-import useStore from '@/hooks'
+import logo from '@assets/img/logo.jpg'
+import useStore from '@/store'
 import './index.scss'
 
 function Login() {
