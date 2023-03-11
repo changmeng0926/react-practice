@@ -1,33 +1,33 @@
 import { makeAutoObservable } from 'mobx'
 import { message } from 'antd'
-import { http, local } from '@/utils'
+import { local } from '@/utils'
+import { login, logout } from '@/api'
 
 const { setSession, getSession, removeSession } = local
 
 class LoginStore {
   cookie = getSession('cookie') || ''
-  info = null
+  loginTime = getSession('loginTime') || ''
   constructor() {
     makeAutoObservable(this)
   }
   // 登录
-  login = async ({ mobile, password }) => {
-    const res = await http.post('/login', { mobile, password })
-    this.cookie = res.data.cookie
-    this.info = { mobile }
+  login = async (params) => {
+    const res = await login(params)
+    const { cookie, loginTime } = res.data
+    this.cookie = cookie
+    this.loginTime = loginTime
     setSession('cookie', this.cookie)
-    setSession('account', mobile)
+    setSession('loginTime', this.loginTime)
     message.success('登录成功')
   }
   // 登出
   logout = async () => {
-    const res = await http.get('/logout')
-    console.log(res, 'logout')
+    const res = await logout()
     if (res.code === 200) {
       message.success('注销成功')
       removeSession('cookie')
-      removeSession('account')
-      this.info = null
+      removeSession('loginTime')
     }
   }
 }

@@ -1,14 +1,31 @@
 import axios from 'axios'
-import { getSession } from './local'
+import { message } from 'antd'
+import { getSession, removeSession } from './local'
+import history from './history'
+import { debounce } from './tools'
 
 const http = axios.create({
   baseURL: 'https://mock.mengxuegu.com/mock/640af59c4689d550adbe0a82/react-practice',
   timeout: 10000,
 })
 
+const token = getSession('cookie')
+const loginTime = getSession('loginTime')
+const limitTime = 2 * 60 * 60 * 1000
+// 登录时间已超时，需要重新登录
+const timeout = debounce(() => {
+  removeSession('cookie')
+  removeSession('loginTime')
+  message.warning('登录时间已超时，需要重新登录')
+  return history.push('login')
+}, 500)
+
 http.interceptors.request.use(
   (config) => {
-    const token = getSession('cookie')
+    const now = new Date()
+    if (loginTime && now - new Date(loginTime) > limitTime) {
+      timeout()
+    }
     if (token) {
       // 设置token
       config.headers.Authorization = `Bearer${token}`
@@ -21,7 +38,11 @@ http.interceptors.request.use(
 )
 http.interceptors.response.use(
   (response) => {
-    return response.data
+    const res = response.data
+    if (loginTime && new Date(res.data?.now) - new Date(loginTime) > limitTime) {
+      timeout()
+    }
+    return res
   },
   (error) => {
     return Promise.reject(error)

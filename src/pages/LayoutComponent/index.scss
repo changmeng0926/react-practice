@@ -5,6 +5,7 @@
   .header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
   .ant-menu {
     flex: 1;
@@ -12,10 +13,19 @@
   .logo {
     width: 36px;
     height: 36px;
-    background: url('../../assets/img/logo.jpg');
+    background: url('../../assets/img/logo.png');
     background-size: contain;
     margin-bottom: 0;
     margin-right: 24px;
+    animation: rotate 5s linear infinite;
+  }
+  @keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
   }
   .info {
     color: #fff;

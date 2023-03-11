@@ -1,17 +1,25 @@
+/**
+ * Description：头部个人信息组件
+ * **/
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
 import { Popconfirm } from 'antd'
-import { local } from '@/utils'
 import useStore from '@/store'
-const { getSession } = local
+
 function Info() {
   const navigate = useNavigate()
-  const { loginStore } = useStore()
-  const account = getSession('account') || ''
+  const { loginStore, userStore } = useStore()
+  const userName = userStore.userinfo?.userName || ''
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const descStyle = { width: '150px', whiteSpace: 'nowrap', lineHeight: '36px' }
+
+  useEffect(() => {
+    userStore.getInfo()
+  }, [userStore])
+
   const logout = async () => {
     setLoading(true)
     await loginStore.logout()
@@ -28,7 +36,7 @@ function Info() {
   return (
     <div className="info">
       <UserOutlined className="icon" />
-      <span className="account">{account}</span>
+      <span className="account">{userName}</span>
       <Popconfirm
         title="请确认"
         placement="leftTop"
@@ -46,4 +54,4 @@ function Info() {
   )
 }
 
-export default Info
+export default observer(Info)
