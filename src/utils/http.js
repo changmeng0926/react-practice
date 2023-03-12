@@ -24,7 +24,7 @@ http.interceptors.request.use(
   (config) => {
     const now = new Date()
     if (loginTime && now - new Date(loginTime) > limitTime) {
-      timeout()
+      return timeout()
     }
     if (token) {
       // 设置token
@@ -40,7 +40,7 @@ http.interceptors.response.use(
   (response) => {
     const res = response.data
     if (loginTime && new Date(res.data?.now) - new Date(loginTime) > limitTime) {
-      timeout()
+      return timeout()
     }
     return res
   },

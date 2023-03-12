@@ -3,7 +3,7 @@ import './App.css'
 import 'antd/dist/reset.css'
 import Layout from '@pages/LayoutComponent'
 import Login from '@pages/Login'
-import Dashboard from '@pages/Dashboard'
+import Home from '@pages/Home'
 import Article from '@pages/Article'
 import Publish from '@pages/Publish'
 import AutoComponent from '@/components/AutoComponent'
@@ -22,7 +22,7 @@ function App() {
               </AutoComponent>
             }
           >
-            <Route path="/" element={<Dashboard />}></Route>
+            <Route path="/" element={<Home />}></Route>
             <Route path="/article" element={<Article />}></Route>
             <Route path="/Publish" element={<Publish />}></Route>
           </Route>

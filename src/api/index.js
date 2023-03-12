@@ -19,7 +19,7 @@ export const getUserInfo = async () => {
   return await http.get('/userinfo')
 }
 /**
- * description: 获取dashboard数据
+ * description: 获取 数据概览图表 数据
  * **/
 export const getBoardData = async () => {
   return await http.get('/dashboard/data')

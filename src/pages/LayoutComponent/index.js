@@ -1,4 +1,4 @@
-import { Breadcrumb, Layout, Menu, theme } from 'antd'
+import { Layout, Menu, theme } from 'antd'
 import { AreaChartOutlined, UnorderedListOutlined, DiffOutlined } from '@ant-design/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import React from 'react'
@@ -45,15 +45,15 @@ function LayoutComponent() {
         </Sider>
         <Layout
           style={{
-            padding: '0 24px 24px',
+            padding: '24px',
           }}
         >
-          <Breadcrumb
+          {/* <Breadcrumb
             items={item}
             style={{
               margin: '16px 0',
             }}
-          />
+          /> */}
           <Content
             style={{
               padding: 24,
