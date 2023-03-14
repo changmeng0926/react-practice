@@ -10,7 +10,6 @@ const http = axios.create({
 })
 
 const token = getSession('cookie')
-const loginTime = getSession('loginTime')
 const limitTime = 2 * 60 * 60 * 1000
 // 登录时间已超时，需要重新登录
 const timeout = debounce(() => {
@@ -34,6 +33,7 @@ http.interceptors.request.use(
 )
 http.interceptors.response.use(
   (response) => {
+    const loginTime = getSession('loginTime')
     const res = response.data
     if (
       window.location.pathname !== '/login' &&
