@@ -17,15 +17,11 @@ const timeout = debounce(() => {
   removeSession('cookie')
   removeSession('loginTime')
   message.warning('登录时间已超时，需要重新登录')
-  return history.push('login')
+  return history.push('/login')
 }, 500)
 
 http.interceptors.request.use(
   (config) => {
-    const now = new Date()
-    if (loginTime && now - new Date(loginTime) > limitTime) {
-      return timeout()
-    }
     if (token) {
       // 设置token
       config.headers.Authorization = `Bearer${token}`
@@ -39,7 +35,11 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   (response) => {
     const res = response.data
-    if (loginTime && new Date(res.data?.now) - new Date(loginTime) > limitTime) {
+    if (
+      window.location.pathname !== '/login' &&
+      loginTime &&
+      new Date(res.data?.now)?.getTime() - new Date(loginTime)?.getTime() > limitTime
+    ) {
       return timeout()
     }
     return res

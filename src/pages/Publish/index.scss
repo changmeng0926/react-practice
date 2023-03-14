@@ -1,0 +1,17 @@
+.publish {
+  &-card {
+    height: 100%;
+  }
+  .cover-radio {
+    line-height: 32px;
+    display: flex;
+    height: 32px;
+    align-items: center;
+  }
+  .cover-upload {
+    padding-top: 24px;
+  }
+  .ql-container.ql-snow {
+    height: 300px;
+  }
+}

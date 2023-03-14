@@ -2,9 +2,11 @@ import { Layout, Menu, theme } from 'antd'
 import { AreaChartOutlined, UnorderedListOutlined, DiffOutlined } from '@ant-design/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import React from 'react'
+import { useEffect } from 'react'
 import Info from './info'
 import './index.scss'
-const { Header, Sider, Content } = Layout
+import useStore from '@/store'
+const { Header, Sider } = Layout
 
 const item = [
   { icon: <AreaChartOutlined />, key: '/', label: '数据概览', title: '数据概览' },
@@ -15,6 +17,12 @@ const item = [
 function LayoutComponent() {
   const navigate = useNavigate()
   const location = useLocation()
+
+  const { channelStore } = useStore()
+  useEffect(() => {
+    channelStore.loadChannels()
+  }, [channelStore])
+
   const current = location.pathname
   const {
     token: { colorBgContainer },
@@ -44,6 +52,7 @@ function LayoutComponent() {
           />
         </Sider>
         <Layout
+          className="layout-main"
           style={{
             padding: '24px',
           }}
@@ -54,7 +63,7 @@ function LayoutComponent() {
               margin: '16px 0',
             }}
           /> */}
-          <Content
+          {/* <Content
             style={{
               padding: 24,
               margin: 0,
@@ -62,8 +71,8 @@ function LayoutComponent() {
               background: colorBgContainer,
             }}
           >
-            <Outlet />
-          </Content>
+          </Content> */}
+          <Outlet />
         </Layout>
       </Layout>
     </Layout>

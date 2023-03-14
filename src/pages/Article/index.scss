@@ -1,0 +1,15 @@
+.article {
+  form .ant-form-item{
+    &:nth-last-of-type(1) {
+      margin-bottom: 0;
+    }
+  }
+}
+.self-card {
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  &.article-container {
+    margin-top: 16px;
+  }
+}
