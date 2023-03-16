@@ -1,5 +1,12 @@
 import { Layout, Menu, theme } from 'antd'
-import { AreaChartOutlined, UnorderedListOutlined, DiffOutlined } from '@ant-design/icons'
+import {
+  AreaChartOutlined,
+  UnorderedListOutlined,
+  DiffOutlined,
+  AppstoreOutlined,
+  FunctionOutlined,
+  BorderOuterOutlined,
+} from '@ant-design/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import React from 'react'
 import { useEffect } from 'react'
@@ -12,6 +19,10 @@ const item = [
   { icon: <AreaChartOutlined />, key: '/', label: '数据概览', title: '数据概览' },
   { icon: <UnorderedListOutlined />, key: '/article', label: '内容管理', title: '内容管理' },
   { icon: <DiffOutlined />, key: '/publish', label: '发布文章', title: '发布文章' },
+  { icon: <AppstoreOutlined />, key: '/classComponent', label: '普通类组件', title: '普通类组件' },
+  { icon: <FunctionOutlined />, key: '/higherOrderFunction', label: '高阶函数', title: '高阶函数' },
+  { icon: <BorderOuterOutlined />, key: '/renderProps', label: 'render-props', title: 'render-props' },
+  { icon: <BorderOuterOutlined />, key: '/hook', label: 'hook', title: 'hook' },
 ]
 
 function LayoutComponent() {
